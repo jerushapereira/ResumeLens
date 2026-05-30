@@ -1,0 +1,30 @@
+Priya Sharma
+B.Tech Computer Science Student
+Email: priya.sharma@example.com | LinkedIn: linkedin.com/in/priyasharma | GitHub: github.com/priyasharma
+
+Summary
+Motivated computer science student interested in full stack web development and AI-enabled products. Comfortable building small applications with Python, Flask, JavaScript, HTML, CSS, SQL, and Git.
+
+Education
+B.Tech in Computer Science, City Engineering College
+Expected Graduation: 2027
+CGPA: 8.4/10
+
+Skills
+Python, JavaScript, HTML, CSS, Flask, SQL, Git, GitHub, REST APIs, Bootstrap, Pandas, Communication
+
+Projects
+AI Resume Analyzer
+Built a Flask web app that uploads resumes, extracts text from documents, and generates ATS feedback using an AI API. Added Chart.js dashboard cards, dark mode, and downloadable reports.
+
+Internship Tracker
+Created a responsive web app to track internship applications by status, deadline, and company. Used browser local storage and filtering to make the app easy to use.
+
+Experience
+Web Development Intern, BrightPath Labs
+June 2025 - August 2025
+Developed reusable UI components, fixed layout bugs, and improved page load time by 18% by compressing assets and removing unused CSS.
+
+Certifications
+Python for Everybody - Coursera
+Responsive Web Design - freeCodeCamp

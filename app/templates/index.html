@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Analyzer</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <a class="brand" href="/">
+                <span class="brand-mark">AI</span>
+                <span>
+                    <strong>ResumeLens</strong>
+                    <small>ATS + role fit</small>
+                </span>
+            </a>
+
+            <nav class="side-nav" aria-label="Dashboard sections">
+                <a href="#upload">Upload</a>
+                <a href="#score">Score</a>
+                <a href="#sections">Sections</a>
+                <a href="#skills">Skill Gap</a>
+                <a href="#projects">Projects</a>
+            </nav>
+
+            <div class="theme-toggle">
+                <span>Theme</span>
+                <button id="themeToggle" class="icon-button" type="button" aria-label="Toggle dark and light mode">
+                    <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <section class="topbar">
+                <div>
+                    <p class="eyebrow">Student portfolio project</p>
+                    <h1>AI Resume Analyzer</h1>
+                    <p class="intro">Upload a resume, choose a target role, and get ATS scoring, skill gaps, section checks, and practical improvement ideas.</p>
+                </div>
+                <div class="status-pill" id="apiStatus">Ready</div>
+            </section>
+
+            <section id="upload" class="upload-grid">
+                <form id="analyzeForm" class="upload-card">
+                    <label id="dropZone" class="drop-zone" for="resumeFile">
+                        <input id="resumeFile" name="resume" type="file" accept=".pdf,.docx" required>
+                        <span class="upload-icon"></span>
+                        <strong>Drop your resume here</strong>
+                        <small>PDF or DOCX, up to 8 MB</small>
+                        <span id="fileName" class="file-name">No file selected</span>
+                    </label>
+
+                    <div class="form-row">
+                        <label for="roleInput">Desired role</label>
+                        <input id="roleInput" name="role" type="text" placeholder="Frontend Intern, Data Analyst, Backend Developer">
+                    </div>
+
+                    <button id="analyzeButton" class="primary-button" type="submit">
+                        Analyze Resume
+                    </button>
+                    <p id="formError" class="form-error" role="alert"></p>
+                </form>
+
+                <div class="guide-panel">
+                    <h2>What this checks</h2>
+                    <div class="check-list">
+                        <span>ATS score</span>
+                        <span>Missing sections</span>
+                        <span>Role match</span>
+                        <span>Grammar and readability</span>
+                        <span>Action verbs</span>
+                        <span>Project quality</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="results" class="results hidden" aria-live="polite">
+                <div class="result-actions">
+                    <div>
+                        <p class="eyebrow">Analysis dashboard</p>
+                        <h2 id="resultTitle">Resume Report</h2>
+                    </div>
+                    <button id="downloadReport" class="secondary-button" type="button">Download Report</button>
+                </div>
+
+                <section class="metric-grid" id="score">
+                    <article class="metric-card score-card">
+                        <span class="card-label">ATS Score</span>
+                        <div class="score-ring" id="atsRing"><span id="atsScore">0</span></div>
+                        <p id="scoreNote">Waiting for analysis.</p>
+                    </article>
+                    <article class="metric-card">
+                        <span class="card-label">Role Match</span>
+                        <canvas id="matchChart" height="190"></canvas>
+                    </article>
+                    <article class="metric-card">
+                        <span class="card-label">Resume Sections</span>
+                        <canvas id="sectionsChart" height="190"></canvas>
+                    </article>
+                </section>
+
+                <section class="dashboard-grid">
+                    <article class="panel" id="sections">
+                        <div class="panel-heading">
+                            <h3>Missing Sections</h3>
+                            <span id="missingCount">0 found</span>
+                        </div>
+                        <div id="sectionBadges" class="badge-list"></div>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-heading">
+                            <h3>Summary Feedback</h3>
+                        </div>
+                        <div id="summaryFeedback" class="text-stack"></div>
+                    </article>
+
+                    <article class="panel wide">
+                        <div class="panel-heading">
+                            <h3>Improvement Suggestions</h3>
+                        </div>
+                        <div id="suggestionsGrid" class="suggestions-grid"></div>
+                    </article>
+
+                    <article class="panel" id="skills">
+                        <div class="panel-heading">
+                            <h3>Skill Gap Analyzer</h3>
+                        </div>
+                        <div id="skillGap" class="text-stack"></div>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-heading">
+                            <h3>Role Matching</h3>
+                        </div>
+                        <div id="roleMatch" class="text-stack"></div>
+                    </article>
+
+                    <article class="panel wide" id="projects">
+                        <div class="panel-heading">
+                            <h3>AI Project Suggestions</h3>
+                        </div>
+                        <div id="projectSuggestions" class="project-list"></div>
+                    </article>
+                </section>
+            </section>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
